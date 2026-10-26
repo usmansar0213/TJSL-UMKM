@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal MADURA UMKM — Pilot Kabupaten Sampang</title>
+<style>
+:root{--green:#174439;--green2:#235b48;--gold:#ebbd69;--bg:#f7f8f5;--text:#19332c;--muted:#5f7168;--line:#dfe7df;--soft:#edf2eb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit}
+.container{max-width:1180px;margin:auto;padding:0 20px}
+.top{background:#103a30;color:#fff;position:sticky;top:0;z-index:5}
+.nav{display:flex;gap:18px;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+.brand{font-size:24px;font-weight:850;letter-spacing:-.6px;text-decoration:none}.brand span{color:var(--gold)}
+.links{display:flex;gap:14px;flex-wrap:wrap}.links a{opacity:.88;font-size:14px;text-decoration:none}.links a:hover{color:var(--gold);opacity:1}
+.badge{border:1px solid #ffffff40;border-radius:999px;padding:5px 12px;font-size:12px;color:#e0eae2}
+.hero{padding:60px 0 68px;background:linear-gradient(120deg,#123e32,#28634c);color:#fff}
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.12;max-width:760px;margin:0 0 14px;letter-spacing:-1px}
+.hero p{color:#e0eae2;max-width:620px;font-size:17px}
+.search{display:flex;gap:10px;margin-top:26px;max-width:780px}.search input{flex:1;min-width:0;border:0;border-radius:10px;padding:14px 16px;outline:none}
+.btn{background:var(--gold);border:0;padding:11px 18px;border-radius:10px;font-weight:750;color:#263527}
+.btn.secondary{background:#e5efe7;color:var(--green)}.btn:disabled{opacity:.55;cursor:not-allowed}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.pills button{color:#fff;background:#ffffff21;border:1px solid #ffffff35;border-radius:50px;padding:7px 13px}
+.pills button.active{background:var(--gold);color:#263527;border-color:var(--gold)}
+.pills button:disabled{opacity:.5;cursor:not-allowed}
+.section{padding:44px 0}.alt{background:var(--soft)}
+.section h2{font-size:27px;letter-spacing:-.6px;margin:0 0 6px}.sub{color:var(--muted);margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 16px #103b2810}
+.card-content{padding:18px}.card h3{margin:0 0 5px;font-size:17px}.card p{margin:0 0 12px;color:var(--muted);font-size:14px}
+.tag{background:#eaf1e9;color:#2e6946;border-radius:6px;font-size:12px;padding:4px 9px;display:inline-block;margin:0 4px 4px 0}
+.tag.q{background:#e8eef8;color:#244d86}
+.art{height:170px;display:flex;align-items:center;justify-content:center;font-size:60px;background:linear-gradient(130deg,#e4eee0,#d5e1ce);position:relative;overflow:hidden}
+.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}.price{font-weight:850;color:#155940}
+.mini{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 12px}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}
+.filters button{border:1px solid var(--line);background:#fff;border-radius:30px;padding:7px 14px}.filters button.active{background:var(--green);color:#fff}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}.panel h3{margin-top:0}
+.muted{color:var(--muted)}.tiny{font-size:12px}
+form label{display:block;font-size:13px;font-weight:650;margin:12px 0 4px}
+form input,form select,form textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:#fff}
+form .check{display:flex;gap:8px;align-items:flex-start;font-weight:400}form .check input{width:auto;margin-top:4px}
+.note{margin-top:12px;padding:10px 12px;border-radius:9px;background:#fff7e6;border:1px solid #f1dba8;font-size:13px}
+.kpi .num{font-size:28px;font-weight:850;color:var(--green)}.bar{height:8px;background:#e3ebe3;border-radius:9px;overflow:hidden;margin:8px 0 4px}.bar i{display:block;height:100%;background:var(--green2)}
+.event{display:flex;gap:14px;align-items:flex-start}.event .art{width:104px;height:104px;flex:none;border-radius:12px;font-size:34px}
+.empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--muted)}
+.storehead{background:#e6f0e7;padding:30px 0}.storehead h1{margin:6px 0}.back{color:var(--green);text-decoration:underline;background:none;border:0;padding:0}
+.channels{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+dialog{border:0;border-radius:16px;max-width:520px;width:calc(100% - 32px);padding:0}dialog::backdrop{background:#0b2a2299}
+.dlg{padding:22px}.dlg h3{margin-top:0}
+.footer{background:#10382d;color:#dbe9df;margin-top:30px;padding:28px 0}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer small{color:#b5d1c1}.notice{font-size:12px;color:#9eb7a8;max-width:520px}
+.hidden{display:none!important}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.hero-art img{width:100%;height:auto;display:block;border-radius:18px;box-shadow:0 18px 40px #0005}
+figure{margin:0}.illus{width:100%;height:auto;display:block;border-radius:14px;aspect-ratio:1200/686;object-fit:cover;background:#e4eee0}
+figcaption{font-size:11px;color:var(--muted);margin-top:6px}.hero figcaption{color:#b9d0c3}
+.banner{margin:0 auto 22px;max-width:860px}.panel figure{margin-bottom:16px}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:24px}}
+@media(max-width:900px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}.hero{padding:42px 0}.search{flex-direction:column}}
+@media(max-width:520px){.grid,.grid4{grid-template-columns:1fr}.links{gap:10px}.event .art{width:80px;height:80px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="container nav">
+  <a class="brand" href="#beranda">Madura<span>UMKM</span></a>
+  <nav class="links" aria-label="Navigasi utama">
+    <a href="#produk">Produk</a><a href="#umkm">Direktori</a><a href="#aktivitas">Kegiatan</a><a href="#klinik">Klinik</a><a href="#b2b">Buyer B2B</a><a href="#dampak">Dampak</a><a href="#daftar">Daftar UMKM</a>
+  </nav>
+  <span class="badge">Pilot Kabupaten Sampang 2027</span>
+</div></header>
+
+<section id="storeView" class="hidden" aria-live="polite"></section>
+
+<main id="home">
+<section class="hero" id="beranda"><div class="container hero-grid"><div>
+  <h1>Produk unggulan UMKM Sampang, langsung dari pembuatnya.</h1>
+  <p>Direktori terkurasi untuk menemukan produk lokal, menghubungi UMKM, mengajukan pembelian grosir, dan mengikuti pelatihan serta klinik usaha.</p>
+  <div class="search"><input id="search" aria-label="Cari produk dan UMKM" placeholder="Cari batik, kerupuk, garam, anyaman, nama UMKM..."><button class="btn" id="searchButton">Cari Produk</button></div>
+  <div class="pills" id="locations">
+    <button data-location="Sampang" class="active">Kabupaten Sampang</button>
+    <button disabled title="Fase replikasi 2028">Bangkalan · segera</button>
+    <button disabled title="Fase replikasi 2028">Pamekasan · segera</button>
+    <button disabled title="Fase replikasi 2028">Sumenep · segera</button>
+  </div>
+  </div>
+  <figure class="hero-art"><img src="ilustrasi/web/01_sampul.webp" alt="Ilustrasi pelaku UMKM pesisir Sampang memperlihatkan batik, kerupuk, garam, dan anyaman" width="1200" height="686"><figcaption>Foto ilustratif buatan AI, bukan dokumentasi kegiatan.</figcaption></figure>
+</div></section>
+
+<section class="section container" id="produk">
+  <h2>Jelajahi Produk UMKM</h2><p class="sub">Filter berdasarkan klaster usaha dan kecamatan.</p>
+  <div class="filters" id="categories"></div>
+  <div class="filters"><select id="kecamatan" aria-label="Filter kecamatan" class="mini"></select></div>
+  <p id="resultInfo" class="muted tiny" aria-live="polite"></p>
+  <div class="grid" id="productGrid"></div>
+</section>
+
+<section class="section alt" id="umkm"><div class="container">
+  <h2>Direktori UMKM</h2><p class="sub">Setiap UMKM memiliki etalase sendiri yang menautkan ke WhatsApp, marketplace, dan media sosialnya.</p>
+  <div class="grid" id="storeGrid"></div>
+</div></section>
+
+<section class="section container" id="aktivitas">
+  <h2>Kegiatan Pengembangan UMKM 2027</h2><p class="sub">Rencana jadwal pelatihan, klinik, dan akses pasar program.</p>
+  <figure class="banner"><img class="illus" src="ilustrasi/web/02_pelatihan.webp" alt="Foto ilustratif kelas pembukuan bagi pelaku UMKM" loading="lazy" width="1200" height="686"><figcaption>Kelas pembukuan &amp; HPP bagi pelaku UMKM. Foto ilustratif buatan AI, bukan dokumentasi kegiatan.</figcaption></figure>
+  <div class="filters" id="eventFilters"></div>
+  <div class="grid" id="eventGrid"></div>
+</section>
+
+<section class="section alt" id="klinik"><div class="container two">
+  <div class="panel">
+    <figure><img class="illus" src="ilustrasi/web/03_digital_qris.webp" alt="Ilustrasi penjual batik memotret produk untuk katalog digital dan pembeli membayar dengan QRIS" loading="lazy" width="1200" height="686"><figcaption>Katalog digital dan pembayaran QRIS. Foto ilustratif buatan AI, bukan dokumentasi kegiatan.</figcaption></figure>
+    <h2>Klinik Konsultasi Bisnis</h2>
+    <p>Klinik hybrid dua kali per bulan untuk pembukuan, HPP, QRIS, katalog digital, legalitas dasar, distribusi, dan pemanfaatan AI.</p>
+    <h3>Literasi keuangan &amp; QRIS</h3>
+    <ul class="muted">
+      <li>Pisahkan uang usaha dan uang rumah tangga.</li>
+      <li>Catat penjualan dan biaya harian; hitung HPP sebelum menetapkan harga.</li>
+      <li>Ajukan QRIS melalui bank atau PJP berizin; jangan bagikan PIN/OTP kepada siapa pun.</li>
+    </ul>
+    <p class="tiny muted">Konsultasi kredit dan sistem pembayaran disampaikan oleh narasumber dari lembaga berizin dan tidak merupakan persetujuan pembiayaan.</p>
+  </div>
+  <form class="panel" data-demo="Pendaftaran klinik">
+    <h3>Daftar sesi klinik</h3>
+    <label for="k-usaha">Nama usaha</label><input id="k-usaha" required>
+    <label for="k-topik">Topik</label>
+    <select id="k-topik"><option>Pembukuan &amp; HPP</option><option>QRIS &amp; pembayaran digital</option><option>Katalog &amp; pemasaran digital</option><option>Legalitas dasar</option><option>Distribusi &amp; kemitraan</option><option>Pemanfaatan AI</option></select>
+    <label for="k-mode">Bentuk sesi</label><select id="k-mode"><option>Tatap muka</option><option>Daring</option></select>
+    <label class="check"><input type="checkbox" required> Saya setuju data ini dipakai untuk penjadwalan klinik.</label>
+    <button class="btn" style="margin-top:14px">Kirim pendaftaran</button>
+  </form>
+</div></section>
+
+<section class="section container" id="b2b"><div class="two">
+  <div class="panel">
+    <figure><img class="illus" src="ilustrasi/web/04_business_matching.webp" alt="Ilustrasi business matching antara UMKM dan buyer institusi" loading="lazy" width="1200" height="686"><figcaption>Business matching UMKM dan buyer. Foto ilustratif buatan AI, bukan dokumentasi kegiatan.</figcaption></figure>
+    <h2>Untuk Buyer Institusi</h2>
+    <p>Hotel, ritel, toko oleh-oleh, instansi, dan distributor dapat mengajukan permintaan pembelian grosir. Tim kurasi meneruskan permintaan ke UMKM yang sesuai dan mencatat tindak lanjutnya.</p>
+    <p class="muted">Portal tidak memproses pembayaran atau menampung dana. Transaksi dilakukan langsung antara buyer dan UMKM.</p>
+  </div>
+  <form class="panel" data-demo="Permintaan buyer">
+    <h3>Ajukan permintaan pembelian</h3>
+    <label for="b-org">Nama organisasi</label><input id="b-org" required>
+    <label for="b-kat">Klaster produk</label><select id="b-kat"></select>
+    <label for="b-qty">Perkiraan kebutuhan</label><input id="b-qty" placeholder="contoh: 300 pak per bulan">
+    <label class="check"><input type="checkbox" required> Saya setuju kontak saya diteruskan ke UMKM terkait.</label>
+    <button class="btn" style="margin-top:14px">Kirim permintaan</button>
+  </form>
+</div></section>
+
+<section class="section alt" id="dampak"><div class="container">
+  <h2>Dashboard Dampak Program</h2>
+  <p class="sub">Laporan agregat tanpa data pribadi. <strong>Angka capaian di bawah adalah data contoh</strong> untuk menunjukkan tampilan dashboard.</p>
+  <div class="grid4" id="kpiGrid"></div>
+</div></section>
+
+<section class="section container" id="daftar"><div class="two">
+  <form class="panel" data-demo="Registrasi UMKM">
+    <h2>Daftar sebagai UMKM Peserta</h2>
+    <p class="muted">Pendaftaran pilot 2027 terbuka untuk UMKM berdomisili di Kabupaten Sampang.</p>
+    <label for="r-usaha">Nama usaha</label><input id="r-usaha" required>
+    <label for="r-kec">Kecamatan</label><select id="r-kec" required></select>
+    <label for="r-kat">Klaster usaha</label><select id="r-kat"></select>
+    <label for="r-wa">Nomor WhatsApp usaha</label><input id="r-wa" inputmode="tel" required>
+    <label class="check"><input type="checkbox" required> Saya menyetujui pemrosesan data usaha untuk seleksi, pembinaan, dan pelaporan agregat sesuai UU No. 27/2022 tentang Pelindungan Data Pribadi.</label>
+    <label class="check"><input type="checkbox"> Saya bersedia profil dan produk usaha saya ditampilkan di portal.</label>
+    <button class="btn" style="margin-top:14px">Kirim pendaftaran</button>
+  </form>
+  <div class="panel">
+    <h3>Asisten deskripsi produk (simulasi AI)</h3>
+    <p class="muted tiny">Membantu menyusun draf deskripsi katalog. Draf wajib ditinjau dan disunting pemilik usaha sebelum tayang. Jangan memasukkan data pribadi.</p>
+    <form id="aiForm">
+      <label for="ai-nama">Nama produk</label><input id="ai-nama" placeholder="contoh: Kerupuk ikan tenggiri" required>
+      <label for="ai-bahan">Bahan / ciri utama</label><input id="ai-bahan" placeholder="contoh: ikan segar Camplong, tanpa pengawet">
+      <label for="ai-untuk">Cocok untuk</label><input id="ai-untuk" placeholder="contoh: oleh-oleh, camilan keluarga">
+      <button class="btn secondary" style="margin-top:14px">Buat draf</button>
+    </form>
+    <div id="aiOut" class="note hidden" aria-live="polite"></div>
+  </div>
+</div></section>
+
+<section class="section alt" id="tentang"><div class="container two">
+  <div class="panel"><h2>Tentang Portal MADURA UMKM</h2>
+    <p>Bagian dari program MADURA UMKM: pelatihan, pendampingan, klinik konsultasi, dan akses pasar bagi 200 UMKM Kabupaten Sampang pada 2027. Portal melengkapi, bukan menggantikan, marketplace umum: etalase menautkan ke kanal penjualan yang sudah dipakai UMKM.</p>
+    <p class="muted">Portal dirancang multi-wilayah dan dapat direplikasi ke Bangkalan, Pamekasan, dan Sumenep.</p></div>
+  <div class="panel"><h2>Pengelolaan &amp; Mitra</h2>
+    <p>Dikelola oleh pelaksana program bersama Pemkab/Diskopindag Sampang. Pengelola setelah 2027 ditetapkan melalui nota kesepahaman.</p>
+    <p class="tiny muted">Logo dan nama mitra pendukung ditampilkan setelah ada persetujuan tertulis dari masing-masing pihak.</p></div>
+</div></section>
+</main>
+
+<footer class="footer"><div class="container footer-inner">
+  <div><strong style="font-size:20px">MADURA UMKM</strong><br><small>Portal Ekosistem UMKM · Pilot Kabupaten Sampang</small></div>
+  <div class="notice">Prototipe untuk lampiran proposal. Nama usaha, produk, harga, jadwal, dan angka dashboard bersifat contoh. Seluruh foto adalah gambar ilustratif buatan AI. Formulir tidak mengirim data.</div>
+</div></footer>
+
+<dialog id="dlg"><div class="dlg" id="dlgBody"></div></dialog>
+
+<script>
+const CATEGORIES=['Kuliner','Batik & Fesyen','Kerajinan','Agro & Perikanan'];
+const KECAMATAN=['Banyuates','Camplong','Jrengik','Karang Penang','Kedungdung','Ketapang','Omben','Pangarengan','Robatal','Sampang','Sokobanah','Sreseh','Tambelangan','Torjun'];
+const stores=[
+ {id:'batik-sekar-sampang',name:'Batik Sekar Sampang',kec:'Sampang',cat:'Batik & Fesyen',qris:true,desc:'Batik tulis dan cap motif pesisir Sampang.',emoji:'🧵'},
+ {id:'kerupuk-bahari-camplong',name:'Kerupuk Bahari Camplong',kec:'Camplong',cat:'Kuliner',qris:true,desc:'Kerupuk ikan dan udang dari hasil laut pesisir.',emoji:'🍘'},
+ {id:'garam-krosok-pangarengan',name:'Garam Pangarengan',kec:'Pangarengan',cat:'Agro & Perikanan',qris:false,desc:'Garam krosok dan garam halus kemasan.',emoji:'🧂'},
+ {id:'anyaman-pandan-omben',name:'Anyaman Pandan Omben',kec:'Omben',cat:'Kerajinan',qris:true,desc:'Tikar, tas, dan wadah anyaman pandan.',emoji:'🧺'},
+ {id:'ikan-asin-sreseh',name:'Ikan Asin Sreseh',kec:'Sreseh',cat:'Agro & Perikanan',qris:false,desc:'Ikan asin dan ikan kering olahan nelayan.',emoji:'🐟'},
+ {id:'kue-tradisional-torjun',name:'Kue Tradisional Torjun',kec:'Torjun',cat:'Kuliner',qris:true,desc:'Jajanan tradisional Madura untuk acara dan oleh-oleh.',emoji:'🥮'},
+ {id:'konveksi-banyuates',name:'Konveksi Banyuates',kec:'Banyuates',cat:'Batik & Fesyen',qris:true,desc:'Seragam, kaos, dan busana muslim.',emoji:'👕'}
+];
+const products=[
+ {name:'Batik Tulis Motif Pesisir',store:'batik-sekar-sampang',price:185000,wholesale:'min. 10 lembar',img:'p_batik_tulis'},
+ {name:'Kain Batik Cap',store:'batik-sekar-sampang',price:95000,wholesale:'min. 20 lembar',img:'p_batik_cap'},
+ {name:'Kerupuk Ikan Tenggiri 250 g',store:'kerupuk-bahari-camplong',price:28000,wholesale:'min. 50 pak',img:'p_kerupuk_ikan'},
+ {name:'Kerupuk Udang 250 g',store:'kerupuk-bahari-camplong',price:32000,wholesale:'min. 50 pak',img:'p_kerupuk_udang'},
+ {name:'Garam Halus Kemasan 500 g',store:'garam-krosok-pangarengan',price:6000,wholesale:'min. 200 pak',img:'p_garam'},
+ {name:'Tas Anyaman Pandan',store:'anyaman-pandan-omben',price:75000,wholesale:'min. 20 buah',img:'p_tas_anyaman'},
+ {name:'Ikan Asin Kering 500 g',store:'ikan-asin-sreseh',price:45000,wholesale:'min. 30 pak',img:'p_ikan_asin'},
+ {name:'Paket Kue Tradisional',store:'kue-tradisional-torjun',price:50000,wholesale:'pesanan acara',img:'p_kue_tradisional'},
+ {name:'Kaos Sablon Khas Madura',store:'konveksi-banyuates',price:70000,wholesale:'min. 24 pcs',img:'p_kaos'}
+];
+const events=[
+ {name:'Kelas Pembukuan, HPP & Cash Flow',type:'Pelatihan',date:'Maret 2027',desc:'Menyusun catatan bulanan dan menghitung HPP.',emoji:'📒',img:'e_pembukuan'},
+ {name:'Literasi Keuangan, QRIS & SIAPIK',type:'Pelatihan',date:'Maret 2027',desc:'Pembayaran digital aman dan pencatatan keuangan digital.',emoji:'💳',img:'e_qris'},
+ {name:'Digital Marketing & Katalog',type:'Pelatihan',date:'Mei 2027',desc:'Foto produk, deskripsi, dan pengelolaan etalase.',emoji:'🎓',img:'e_digital_marketing'},
+ {name:'Peluncuran Portal MADURA UMKM',type:'Marketing',date:'Juni 2027',desc:'Peluncuran versi 1 dan onboarding etalase.',emoji:'🚀',img:'e_peluncuran'},
+ {name:'AI untuk Promosi & Administrasi',type:'Pelatihan',date:'Juli 2027',desc:'Membuat konten dan analisis sederhana dengan validasi manusia.',emoji:'🤖',img:'e_ai'},
+ {name:'Business Matching Tahap 1',type:'Business Matching',date:'September 2027',desc:'Pertemuan UMKM terkurasi dengan buyer dan distributor.',emoji:'🤝',img:'e_business_matching'},
+ {name:'Pameran Produk Unggulan',type:'Pameran',date:'Oktober 2027',desc:'Partisipasi pameran terpilih bagi UMKM siap pasar.',emoji:'🏬',img:'e_pameran'}
+];
+const kpis=[
+ {label:'UMKM peserta terasesmen',target:200,demo:200},
+ {label:'Menyelesaikan pelatihan wajib',target:160,demo:118},
+ {label:'Etalase aktif',target:150,demo:96},
+ {label:'Pencatatan keuangan rutin',target:140,demo:84},
+ {label:'UMKM coaching intensif',target:50,demo:50},
+ {label:'Ikut business matching',target:50,demo:22},
+ {label:'Lead pembeli terverifikasi',target:30,demo:11},
+ {label:'UMKM coaching omzet naik ≥15%',target:30,demo:9}
+];
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rupiah=n=>'Rp '+n.toLocaleString('id-ID');
+const storeOf=id=>stores.find(s=>s.id===id);
+let category='Semua',kec='Semua',eventFilter='Semua';
+
+function chips(el,values,attr,current,onPick){
+  el.innerHTML=['Semua',...values].map(v=>`<button data-${attr}="${esc(v)}" class="${v===current?'active':''}">${esc(v)}</button>`).join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{onPick(b.dataset[attr]);el.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b))});
+}
+function options(el,values,first){el.innerHTML=(first?`<option value="Semua">${esc(first)}</option>`:'')+values.map(v=>`<option>${esc(v)}</option>`).join('')}
+
+const CARD_IMG='ilustrasi/web/cards/';
+function art(img,emoji,alt,cls=''){return `<div class="art ${cls}"><span aria-hidden="true">${emoji}</span>${img?`<img src="${CARD_IMG}${img}.webp" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`:''}</div>`}
+const storeImg=id=>(products.find(p=>p.store===id)||{}).img;
+function productCard(p){const s=storeOf(p.store);return `<article class="card">${art(p.img,s.emoji,'Ilustrasi '+p.name)}<div class="card-content"><span class="tag">${esc(s.cat)}</span><span class="tag">${esc(s.kec)}</span>${s.qris?'<span class="tag q">QRIS</span>':''}<h3 style="margin-top:8px">${esc(p.name)}</h3><p>${esc(s.name)}</p><div class="meta"><span class="price">${rupiah(p.price)}</span><button class="mini" data-product="${esc(p.name)}">Detail →</button></div></div></article>`}
+function bindProducts(root){root.querySelectorAll('[data-product]').forEach(b=>b.onclick=()=>showProduct(b.dataset.product))}
+
+function renderProducts(){
+  const q=$('search').value.toLocaleLowerCase('id').trim();
+  const list=products.filter(p=>{const s=storeOf(p.store);return (category==='Semua'||s.cat===category)&&(kec==='Semua'||s.kec===kec)&&[p.name,s.name,s.cat,s.kec].join(' ').toLocaleLowerCase('id').includes(q)});
+  $('resultInfo').textContent=list.length+' produk ditemukan';
+  $('productGrid').innerHTML=list.map(productCard).join('')||'<div class="empty">Tidak ada produk yang sesuai filter.</div>';
+  bindProducts($('productGrid'));
+}
+function renderStores(){
+  $('storeGrid').innerHTML=stores.map(s=>`<article class="card">${art(storeImg(s.id),s.emoji,'Ilustrasi produk '+s.name)}<div class="card-content"><span class="tag">${esc(s.kec)}</span><span class="tag">${esc(s.cat)}</span>${s.qris?'<span class="tag q">QRIS</span>':''}<h3 style="margin-top:8px">${esc(s.name)}</h3><p>${esc(s.desc)}</p><a class="mini" href="#toko/${s.id}" style="text-decoration:none;display:inline-block">Lihat Etalase →</a><p class="tiny muted" style="margin-top:10px">maduraumkm.id/${s.id}</p></div></article>`).join('');
+}
+function renderEvents(){
+  $('eventGrid').innerHTML=events.filter(e=>eventFilter==='Semua'||e.type===eventFilter).map(e=>`<article class="card"><div class="card-content event">${art(e.img,e.emoji,'Ilustrasi '+e.name)}<div><span class="tag">${esc(e.type)}</span><h3 style="margin-top:8px">${esc(e.name)}</h3><p>${esc(e.desc)}</p><span class="tiny muted">Rencana: ${esc(e.date)}</span></div></div></article>`).join('');
+}
+function renderKpis(){
+  $('kpiGrid').innerHTML=kpis.map(k=>{const pct=Math.min(100,Math.round(k.demo/k.target*100));return `<div class="panel kpi"><div class="tiny muted">${esc(k.label)}</div><div class="num">${k.demo}<span class="tiny muted"> / ${k.target}</span></div><div class="bar" role="img" aria-label="${pct}% dari target"><i style="width:${pct}%"></i></div><div class="tiny muted">${pct}% dari target 2027 · contoh</div></div>`}).join('');
+}
+
+function openDialog(html){$('dlgBody').innerHTML=html+'<p style="margin:18px 0 0"><button class="btn secondary" id="dlgClose">Tutup</button></p>';$('dlgClose').onclick=()=>$('dlg').close();$('dlg').showModal()}
+function showProduct(name){
+  const p=products.find(x=>x.name===name),s=storeOf(p.store);
+  openDialog(`<h3>${esc(p.name)}</h3><p>${esc(s.name)} · ${esc(s.kec)}</p><p><span class="price">${rupiah(p.price)}</span> <span class="tiny muted">harga eceran</span></p><p class="tiny">Grosir: ${esc(p.wholesale)}</p>${s.qris?'<p class="tiny">Menerima pembayaran QRIS.</p>':''}<p><a class="btn" href="#toko/${s.id}" onclick="document.getElementById('dlg').close()" style="text-decoration:none;display:inline-block">Buka etalase</a></p><p class="tiny muted">Contoh produk dan harga untuk prototipe.</p>`);
+}
+function renderStore(id){
+  const s=storeOf(id);if(!s){location.hash='umkm';return}
+  const list=products.filter(p=>p.store===id);
+  $('storeView').innerHTML=`<div class="storehead"><div class="container"><button class="back" onclick="history.length>1?history.back():location.hash='umkm'">← Kembali ke portal</button><h1>${esc(s.name)}</h1><p>${esc(s.desc)} · Kec. ${esc(s.kec)}, Sampang</p><div class="channels"><button class="btn" data-contact>Hubungi via WhatsApp</button><button class="mini" data-contact>Toko di marketplace</button><button class="mini" data-contact>Instagram</button>${s.qris?'<span class="tag q">Menerima QRIS</span>':''}</div></div></div><div class="container section"><h2>Katalog</h2><div class="grid">${list.map(productCard).join('')}</div></div>`;
+  bindProducts($('storeView'));
+  $('storeView').querySelectorAll('[data-contact]').forEach(b=>b.onclick=()=>openDialog('<h3>Kanal kontak UMKM</h3><p>Pada versi produksi, tombol ini membuka WhatsApp atau toko marketplace milik UMKM. Kontak belum diisi di prototipe.</p>'));
+}
+function route(){
+  const m=location.hash.match(/^#toko\/([\w-]+)$/);
+  $('storeView').classList.toggle('hidden',!m);$('home').classList.toggle('hidden',!!m);
+  if(m){renderStore(m[1]);window.scrollTo(0,0)}
+}
+
+chips($('categories'),CATEGORIES,'category','Semua',v=>{category=v;renderProducts()});
+chips($('eventFilters'),['Pelatihan','Marketing','Business Matching','Pameran'],'event','Semua',v=>{eventFilter=v;renderEvents()});
+options($('kecamatan'),KECAMATAN,'Semua kecamatan');options($('r-kec'),KECAMATAN);options($('r-kat'),CATEGORIES);options($('b-kat'),CATEGORIES);
+$('kecamatan').onchange=e=>{kec=e.target.value;renderProducts()};
+$('searchButton').onclick=()=>{renderProducts();$('produk').scrollIntoView({behavior:'smooth'})};
+$('search').addEventListener('keydown',e=>{if(e.key==='Enter')$('searchButton').click()});
+$('search').addEventListener('input',renderProducts);
+document.querySelectorAll('form[data-demo]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();openDialog(`<h3>${esc(f.dataset.demo)} diterima</h3><p>Ini prototipe: data tidak dikirim atau disimpan. Pada versi produksi, petugas akan menindaklanjuti melalui kontak yang diberikan.</p>`);f.reset()}));
+$('aiForm').addEventListener('submit',e=>{e.preventDefault();const n=$('ai-nama').value.trim(),b=$('ai-bahan').value.trim(),u=$('ai-untuk').value.trim();
+  $('aiOut').innerHTML=`<strong>Draf (wajib ditinjau):</strong><br>${esc(n)} buatan UMKM Sampang${b?`, dibuat dari ${esc(b)}`:''}. ${u?`Cocok untuk ${esc(u)}. `:''}Diproduksi dalam jumlah terbatas dengan kontrol kualitas langsung dari pembuatnya. Tersedia untuk pembelian eceran maupun grosir.`;$('aiOut').classList.remove('hidden')});
+window.addEventListener('hashchange',route);
+renderProducts();renderStores();renderEvents();renderKpis();route();
+</script>
+</body></html>
